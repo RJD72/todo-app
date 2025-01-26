@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ToDo App</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-QTFQ6SNKV8"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-QTFQ6SNKV8");
+  </script>
+  <body>
+    <h1>My To-Do List</h1>
+    <div class="container">
+      <input type="text" id="taskInput" placeholder="Enter a new task" />
+      <button id="addTaskBtn">Add ToDo</button>
+      <ul id="taskList"></ul>
+    </div>
+    <script type="module" src="app.js"></script>
+   
+    </script>
+  </body>
+</html>
