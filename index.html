@@ -29,8 +29,10 @@
     <main>
       <div class="container">
         <label for="taskInput"><h2>Enter a task</h2></label>
-        <input name="taskInput" type="text" id="taskInput" />
-        <button id="addTaskBtn">Add Task</button>
+        <input name="taskInput" type="text" id="taskInput" tabindex="1" />
+        <button id="addTaskBtn" tabindex="2" aria-label="Add Task">
+          Add Task
+        </button>
         <ul id="taskList"></ul>
       </div>
     </main>
