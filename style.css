@@ -19,6 +19,10 @@ h1 {
   max-width: 400px;
 }
 
+label {
+  display: block;
+}
+
 input[type="text"] {
   width: 70%;
   padding: 10px;

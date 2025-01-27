@@ -8,6 +8,10 @@ import {
   collection,
 } from "firebase/firestore";
 
+const taskInput = document.getElementById("taskInput");
+const addTaskBtn = document.getElementById("addTaskBtn");
+const taskList = document.getElementById("taskList");
+
 const sw = new URL("service-worker.js", import.meta.url);
 if ("serviceWorker" in navigator) {
   const s = navigator.serviceWorker;
@@ -39,11 +43,22 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const taskInput = document.getElementById("taskInput");
-const addTaskBtn = document.getElementById("addTaskBtn");
-const taskList = document.getElementById("taskList");
-
 window.addEventListener("load", () => {
+  renderTasks();
+});
+
+taskInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    addTask();
+  }
+});
+
+taskList.addEventListener("keypress", async (e) => {
+  if (e.target.tagName === "LI" && e.key === "Enter") {
+    await updateDoc(doc(db, "todos", e.target.id), {
+      completed: true,
+    });
+  }
   renderTasks();
 });
 
