@@ -1,4 +1,3 @@
-// Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import {
   doc,
@@ -44,28 +43,31 @@ const taskInput = document.getElementById("taskInput");
 const addTaskBtn = document.getElementById("addTaskBtn");
 const taskList = document.getElementById("taskList");
 
+window.addEventListener("load", () => {
+  renderTasks();
+});
+
 // Add Task
 addTaskBtn.addEventListener("click", async () => {
   const task = taskInput.value.trim();
   if (task) {
-    const taskInput = document.getElementById("taskInput");
-    const taskText = taskInput.value.trim();
-
-    if (taskText) {
-      await addTaskToFirestore(taskText);
-      renderTasks();
-      taskInput.value = "";
-    }
+    await addTaskToFirestore(task);
+    taskInput.value = "";
     renderTasks();
+  } else {
+    alert("Please enter a task!");
   }
 });
 
-async function addTaskToFirestore(taskText) {
-  await addDoc(collection(db, "todos"), {
-    text: taskText,
-    completed: false,
-  });
-}
+// Remove Task
+taskList.addEventListener("click", async (e) => {
+  if (e.target.tagName === "LI") {
+    await updateDoc(doc(db, "todos", e.target.id), {
+      completed: true,
+    });
+  }
+  renderTasks();
+});
 
 async function renderTasks() {
   var tasks = await getTasksFromFirestore();
@@ -76,23 +78,40 @@ async function renderTasks() {
       const taskItem = document.createElement("li");
       taskItem.id = task.id;
       taskItem.textContent = task.data().text;
+      taskItem.tabIndex = 0;
       taskList.appendChild(taskItem);
     }
   });
 }
 
-async function getTasksFromFirestore() {
-  var data = await getDocs(collection(db, "todos"));
-  let userData = [];
-  data.forEach((doc) => {
-    userData.push(doc);
+async function addTaskToFirestore(taskText) {
+  await addDoc(collection(db, "todos"), {
+    text: taskText,
+    completed: false,
   });
-  return userData;
 }
 
-// Remove Task on Click
-taskList.addEventListener("click", (e) => {
-  if (e.target.tagName === "LI") {
-    e.target.remove();
+async function getTasksFromFirestore() {
+  return await getDocs(collection(db, "todos"));
+}
+
+//Allow task addition on enter key while in task input
+taskInput.addEventListener("keypress", function (event) {
+  if (event.key === "Enter") {
+    addTaskBtn.click();
   }
+});
+
+//Allow tasks to be completed on enter
+taskList.addEventListener("keypress", async function (e) {
+  if (e.target.tagName === "LI" && e.key === "Enter") {
+    await updateDoc(doc(db, "todos", e.target.id), {
+      completed: true,
+    });
+  }
+  renderTasks();
+});
+
+window.addEventListener("error", function (event) {
+  console.error("Error occurred: ", event.message);
 });
