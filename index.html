@@ -27,83 +27,49 @@
       <h1>My To-Do List</h1>
     </header>
     <main>
-      <!-- Notification Area -->
-      <div
-        aria-live="polite"
-        id="notification"
-        style="visibility: hidden"
-      ></div>
       <div class="container">
-        <button id="openModalBtn" tabindex="1" aria-label="Add New Task">
-          Add Task
+        <!-- Modal Trigger -->
+        <button id="openModalBtn">Add Task</button>
+
+        <!-- Modal -->
+        <div
+          id="modal"
+          role="dialog"
+          aria-labelledby="modalTitle"
+          aria-modal="true"
+          hidden
+        >
+          <h2 id="modalTitle">Add a New Task</h2>
+          <input type="text" placeholder="Task Name" />
+          <button id="closeModalBtn">Close</button>
+        </div>
+
+        <!-- Notification Area -->
+        <div aria-live="polite" id="notification"></div>
+
+        <!-- Dropdown Trigger -->
+        <button aria-haspopup="listbox" aria-expanded="false" id="dropdownBtn">
+          Choose a Priority
         </button>
+
+        <!-- Dropdown List -->
+        <ul id="dropdown" role="listbox" style="display: none">
+          <li id="priority-high" role="option" tabindex="0">High</li>
+          <li id="priority-medium" role="option" tabindex="0">Medium</li>
+          <li id="priority-low" role="option" tabindex="0">Low</li>
+        </ul>
+
+        <form action="">
+          <label for="taskInput">Enter a task</label>
+
+          <input name="taskInput" type="text" id="taskInput" tabindex="1" />
+          <button id="addTaskBtn" tabindex="2" aria-label="Add Task">
+            Add Task
+          </button>
+        </form>
         <ul id="taskList"></ul>
       </div>
     </main>
-
-    <!-- Modal -->
-    <div
-      id="modal"
-      role="dialog"
-      aria-labelledby="modalTitle"
-      aria-hidden="true"
-      style="
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: white;
-        padding: 1rem;
-        border: 1px solid #ccc;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      "
-    >
-      <h2 id="modalTitle">Add a New Task</h2>
-      <input
-        type="text"
-        id="modalTaskInput"
-        placeholder="Task Name"
-        tabindex="2"
-      />
-      <button id="closeModalBtn" tabindex="3">Close</button>
-      <button id="saveTaskBtn" tabindex="4">Save Task</button>
-    </div>
-
-    <script>
-      const openModalBtn = document.getElementById("openModalBtn");
-      const closeModalBtn = document.getElementById("closeModalBtn");
-      const saveTaskBtn = document.getElementById("saveTaskBtn");
-      const modal = document.getElementById("modal");
-      const modalTaskInput = document.getElementById("modalTaskInput");
-      const taskList = document.getElementById("taskList");
-
-      openModalBtn.addEventListener("click", () => {
-        modal.setAttribute("aria-hidden", "false");
-        modal.style.display = "block";
-        modalTaskInput.focus(); // Focus on the input inside the modal
-      });
-
-      closeModalBtn.addEventListener("click", () => {
-        modal.setAttribute("aria-hidden", "true");
-        modal.style.display = "none";
-        openModalBtn.focus(); // Return focus to the trigger
-      });
-
-      saveTaskBtn.addEventListener("click", () => {
-        const taskName = modalTaskInput.value.trim();
-        if (taskName) {
-          const taskItem = document.createElement("li");
-          taskItem.textContent = taskName;
-          taskList.appendChild(taskItem);
-          modalTaskInput.value = ""; // Clear the input
-          modal.setAttribute("aria-hidden", "true");
-          modal.style.display = "none";
-          openModalBtn.focus(); // Return focus to the trigger
-        } else {
-          alert("Please enter a task name.");
-        }
-      });
-    </script>
+    <script type="module" src="app.js"></script>
   </body>
 </html>
