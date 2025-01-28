@@ -125,8 +125,21 @@ taskList.addEventListener("keypress", async function (e) {
     });
   }
   renderTasks();
+  // Example: Call the function when a task is added
+  showNotification("Task added successfully!");
 });
 
 window.addEventListener("error", function (event) {
   console.error("Error occurred: ", event.message);
 });
+
+const notification = document.getElementById("notification");
+
+function showNotification(message) {
+  notification.textContent = message;
+  notification.style.visibility = "visible";
+  setTimeout(() => {
+    notification.style.visibility = "hidden";
+    notification.textContent = ""; // Clear message for future updates
+  }, 3000);
+}
