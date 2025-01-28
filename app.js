@@ -1,3 +1,4 @@
+// Import necessary Firebase modules for app initialization and Firestore operations
 import { initializeApp } from "firebase/app";
 import {
   doc,
@@ -8,33 +9,23 @@ import {
   collection,
 } from "firebase/firestore";
 
+// Get references to DOM elements
 const taskInput = document.getElementById("taskInput");
 const addTaskBtn = document.getElementById("addTaskBtn");
 const taskList = document.getElementById("taskList");
+const openModalBtn = document.getElementById("openModalBtn");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const modal = document.getElementById("modal");
+const dropdownBtn = document.getElementById("dropdownBtn");
+const dropdown = document.getElementById("dropdown");
+const notification = document.getElementById("notification");
 
-const sw = new URL("service-worker.js", import.meta.url);
-if ("serviceWorker" in navigator) {
-  const s = navigator.serviceWorker;
-  s.register(sw.href, {
-    scope: "/todo-app/",
-  })
-    .then((_) =>
-      console.log(
-        "Service Worker Registered for scope:",
-        sw.href,
-        "with",
-        import.meta.url
-      )
-    )
-    .catch((err) => console.error("Service Worker Error:", err));
-}
-
-// Your web app's Firebase configuration
+// Firebase configuration
 const firebaseConfig = {
   apiKey: "AIzaSyA3n0yJDEGULLwPmO5PlY906sVxjVTYLnw",
   authDomain: "my-first-pwa-1af14.firebaseapp.com",
   projectId: "my-first-pwa-1af14",
-  storageBucket: "my-first-pwa-1af14.firebasestorage.app",
+  storageBucket: "my-first-pwa-1af14.appspot.com",
   messagingSenderId: "764859055293",
   appId: "1:764859055293:web:e912e7c3e2bd74098b4bd4",
 };
@@ -43,52 +34,33 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-window.addEventListener("load", () => {
-  renderTasks();
-});
+// Service Worker Registration
+if ("serviceWorker" in navigator) {
+  const sw = new URL("service-worker.js", import.meta.url);
+  navigator.serviceWorker
+    .register(sw.href, { scope: "/todo-app/" })
+    .then(() => console.log("Service Worker Registered"))
+    .catch((err) => console.error("Service Worker Error:", err));
+}
 
+// Event Listeners
+window.addEventListener("load", renderTasks);
 taskInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") {
-    renderTasks();
-  }
+  if (e.key === "Enter") addTaskBtn.click();
 });
+addTaskBtn.addEventListener("click", addTask);
+taskList.addEventListener("click", handleTaskCompletion);
+taskList.addEventListener("keypress", handleTaskCompletion);
+openModalBtn.addEventListener("click", openModal);
+closeModalBtn.addEventListener("click", closeModal);
+dropdownBtn.addEventListener("click", toggleDropdown);
 
-taskList.addEventListener("keypress", async (e) => {
-  if (e.target.tagName === "LI" && e.key === "Enter") {
-    await updateDoc(doc(db, "todos", e.target.id), {
-      completed: true,
-    });
-  }
-  renderTasks();
-});
-
-// Add Task
-addTaskBtn.addEventListener("click", async () => {
-  const task = taskInput.value.trim();
-  if (task) {
-    await addTaskToFirestore(task);
-    taskInput.value = "";
-    renderTasks();
-  } else {
-    alert("Please enter a task!");
-  }
-});
-
-// Remove Task
-taskList.addEventListener("click", async (e) => {
-  if (e.target.tagName === "LI") {
-    await updateDoc(doc(db, "todos", e.target.id), {
-      completed: true,
-    });
-  }
-  renderTasks();
-});
-
+// Functions
 async function renderTasks() {
-  var tasks = await getTasksFromFirestore();
-  taskList.innerHTML = "";
+  const tasks = await getTasksFromFirestore();
+  taskList.innerHTML = ""; // Clear the task list
 
-  tasks.forEach((task, index) => {
+  tasks.forEach((task) => {
     if (!task.data().completed) {
       const taskItem = document.createElement("li");
       taskItem.id = task.id;
@@ -99,6 +71,25 @@ async function renderTasks() {
   });
 }
 
+async function addTask() {
+  const task = taskInput.value.trim();
+  if (task) {
+    await addTaskToFirestore(task);
+    taskInput.value = "";
+    renderTasks();
+    showNotification("Task added successfully!");
+  } else {
+    alert("Please enter a task!");
+  }
+}
+
+async function handleTaskCompletion(e) {
+  if ((e.type === "click" || e.key === "Enter") && e.target.tagName === "LI") {
+    await updateDoc(doc(db, "todos", e.target.id), { completed: true });
+    renderTasks();
+  }
+}
+
 async function addTaskToFirestore(taskText) {
   await addDoc(collection(db, "todos"), {
     text: taskText,
@@ -107,39 +98,33 @@ async function addTaskToFirestore(taskText) {
 }
 
 async function getTasksFromFirestore() {
-  return await getDocs(collection(db, "todos"));
+  const querySnapshot = await getDocs(collection(db, "todos"));
+  return querySnapshot.docs;
 }
 
-//Allow task addition on enter key while in task input
-taskInput.addEventListener("keypress", function (event) {
-  if (event.key === "Enter") {
-    addTaskBtn.click();
-  }
-});
+function openModal() {
+  modal.setAttribute("aria-hidden", "false");
+  modal.style.display = "block";
+  closeModalBtn.focus();
+}
 
-//Allow tasks to be completed on enter
-taskList.addEventListener("keypress", async function (e) {
-  if (e.target.tagName === "LI" && e.key === "Enter") {
-    await updateDoc(doc(db, "todos", e.target.id), {
-      completed: true,
-    });
-  }
-  renderTasks();
-  // Example: Call the function when a task is added
-  showNotification("Task added successfully!");
-});
+function closeModal() {
+  modal.setAttribute("aria-hidden", "true");
+  modal.style.display = "none";
+  openModalBtn.focus();
+}
 
-window.addEventListener("error", function (event) {
-  console.error("Error occurred: ", event.message);
-});
-
-const notification = document.getElementById("notification");
+function toggleDropdown() {
+  const expanded = dropdownBtn.getAttribute("aria-expanded") === "true";
+  dropdownBtn.setAttribute("aria-expanded", !expanded);
+  dropdown.style.display = expanded ? "none" : "block";
+}
 
 function showNotification(message) {
   notification.textContent = message;
   notification.style.visibility = "visible";
   setTimeout(() => {
     notification.style.visibility = "hidden";
-    notification.textContent = ""; // Clear message for future updates
+    notification.textContent = "";
   }, 3000);
 }
