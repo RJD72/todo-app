@@ -56,3 +56,17 @@ li {
   border: 1px solid #ccc;
   border-radius: 4px;
 }
+
+#dropdown {
+  display: none;
+}
+#dropdown.dropdown-open {
+  display: block;
+}
+li:focus {
+  outline: 2px solid blue;
+}
+li.completed {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
