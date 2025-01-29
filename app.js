@@ -10,8 +10,8 @@ import {
 } from "firebase/firestore";
 
 // Get references to DOM elements
-const taskInput = document.getElementById("taskInput");
-const addTaskBtn = document.getElementById("addTaskBtn");
+// const taskInput = document.getElementById("taskInput");
+// const addTaskBtn = document.getElementById("addTaskBtn");
 const taskList = document.getElementById("taskList");
 const openModalBtn = document.getElementById("openModalBtn");
 const closeModalBtn = document.getElementById("closeModalBtn");
@@ -45,10 +45,10 @@ if ("serviceWorker" in navigator) {
 
 // Event Listeners
 window.addEventListener("load", renderTasks);
-taskInput.addEventListener("keypress", (e) => {
-  if (e.key === "Enter") addTaskBtn.click();
-});
-addTaskBtn.addEventListener("click", addTask);
+// taskInput.addEventListener("keypress", (e) => {
+//   if (e.key === "Enter") addTaskBtn.click();
+// });
+// addTaskBtn.addEventListener("click", addTask);
 taskList.addEventListener("click", handleTaskCompletion);
 taskList.addEventListener("keypress", handleTaskCompletion);
 openModalBtn.addEventListener("click", openModal);
