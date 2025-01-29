@@ -57,18 +57,21 @@ dropdownBtn.addEventListener("click", toggleDropdown);
 
 // Functions
 async function renderTasks() {
-  const tasks = await getTasksFromFirestore();
-  taskList.innerHTML = ""; // Clear the task list
-
-  tasks.forEach((task) => {
-    if (!task.data().completed) {
-      const taskItem = document.createElement("li");
-      taskItem.id = task.id;
-      taskItem.textContent = task.data().text;
-      taskItem.tabIndex = 0;
-      taskList.appendChild(taskItem);
-    }
-  });
+  try {
+    const tasks = await getTasksFromFirestore();
+    taskList.innerHTML = ""; // Clear the task list
+    tasks.forEach((task) => {
+      if (!task.data().completed) {
+        const taskItem = document.createElement("li");
+        taskItem.id = task.id;
+        taskItem.textContent = task.data().text;
+        taskItem.tabIndex = 0;
+        taskList.appendChild(taskItem);
+      }
+    });
+  } catch (error) {
+    console.error("Error fetching tasks:", error);
+  }
 }
 
 async function addTask() {
@@ -85,17 +88,37 @@ async function addTask() {
 
 async function handleTaskCompletion(e) {
   if ((e.type === "click" || e.key === "Enter") && e.target.tagName === "LI") {
-    await updateDoc(doc(db, "todos", e.target.id), { completed: true });
-    renderTasks();
+    const taskItem = e.target;
+    await updateDoc(doc(db, "todos", taskItem.id), { completed: true });
+    taskItem.classList.add("completed"); // Add visual feedback
+    setTimeout(renderTasks, 500); // Wait to refresh
   }
 }
 
+// async function handleTaskCompletion(e) {
+//   if ((e.type === "click" || e.key === "Enter") && e.target.tagName === "LI") {
+//     await updateDoc(doc(db, "todos", e.target.id), { completed: true });
+//     renderTasks();
+//   }
+// }
+
 async function addTaskToFirestore(taskText) {
-  await addDoc(collection(db, "todos"), {
-    text: taskText,
-    completed: false,
-  });
+  try {
+    await addDoc(collection(db, "todos"), {
+      text: taskText,
+      completed: false,
+    });
+  } catch (error) {
+    console.error("Error adding task:", error);
+  }
 }
+
+// async function addTaskToFirestore(taskText) {
+//   await addDoc(collection(db, "todos"), {
+//     text: taskText,
+//     completed: false,
+//   });
+// }
 
 async function getTasksFromFirestore() {
   const querySnapshot = await getDocs(collection(db, "todos"));
@@ -103,28 +126,51 @@ async function getTasksFromFirestore() {
 }
 
 function openModal() {
-  modal.setAttribute("aria-hidden", "false");
-  modal.style.display = "block";
+  modal.hidden = false; // Use hidden attribute
   closeModalBtn.focus();
 }
 
 function closeModal() {
-  modal.setAttribute("aria-hidden", "true");
-  modal.style.display = "none";
+  modal.hidden = true;
   openModalBtn.focus();
 }
+
+// function openModal() {
+//   modal.setAttribute("aria-hidden", "false");
+//   modal.style.display = "block";
+//   closeModalBtn.focus();
+// }
+
+// function closeModal() {
+//   modal.setAttribute("aria-hidden", "true");
+//   modal.style.display = "none";
+//   openModalBtn.focus();
+// }
 
 function toggleDropdown() {
   const expanded = dropdownBtn.getAttribute("aria-expanded") === "true";
   dropdownBtn.setAttribute("aria-expanded", !expanded);
-  dropdown.style.display = expanded ? "none" : "block";
+  dropdown.classList.toggle("dropdown-open", !expanded); // Add/remove class
 }
 
+// function toggleDropdown() {
+//   const expanded = dropdownBtn.getAttribute("aria-expanded") === "true";
+//   dropdownBtn.setAttribute("aria-expanded", !expanded);
+//   dropdown.style.display = expanded ? "none" : "block";
+// }
+
 function showNotification(message) {
-  notification.textContent = message;
-  notification.style.visibility = "visible";
+  notification.textContent = message; // Avoid hiding the element
   setTimeout(() => {
-    notification.style.visibility = "hidden";
-    notification.textContent = "";
+    notification.textContent = ""; // Clear content after 3 seconds
   }, 3000);
 }
+
+// function showNotification(message) {
+//   notification.textContent = message;
+//   notification.style.visibility = "visible";
+//   setTimeout(() => {
+//     notification.style.visibility = "hidden";
+//     notification.textContent = "";
+//   }, 3000);
+// }

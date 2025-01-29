@@ -1,4 +1,4 @@
-24370
+24374
 158C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\firebase\auth\web-extension\dist\esm\functions\index.d.ts133824081422274569 0
 140C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\firebase\auth\dist\esm\compat\app-check133824081420456511 1
 125C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\fast-glob\out\index.d.ts133824081382297464 0
@@ -86,7 +86,7 @@
 123C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\async\internal\once.js133824081390065037 0
 124C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\type-check\lib\check.js133824157953847561 0
 110C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\firestore.indexes.json133824154563523165 0
-94C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\app.js133825811803651828 0
+94C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\app.js133825825884723431 0
 106C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\yargs133824081384315667 1
 154C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\firebase\storage\dist\compat\remote-config\index.d.ts133824081460340208 0
 137C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\firebase\functions\dist\auth\cordova133824081450708480 1
@@ -100,7 +100,7 @@
 109C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\path-key133824157954771185 1
 139C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\eslint\lib\rules\symbol-description.js133824157965704712 0
 151C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\caniuse-lite\data\features\internationalization.js133824081402693353 0
-92C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs133825820392031937 1
+92C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs133825826262879195 1
 148C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\firebase\app-check\dist\data-connect\index.d.ts133824081415491009 0
 156C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\@opentelemetry\api\build\src\metrics\MeterProvider.d.ts133824085414185869 0
 116C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\math-intrinsics133824157958852157 1
@@ -307,7 +307,7 @@
 142C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\@swc\helpers\_\_skip_first_generator_next133824081400302506 1
 134C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\side-channel-weakmap\package.json133824157955791086 0
 147C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\firebase\firestore\lite\dist\esm\installations133824081450191871 1
-97C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\style.css133824817067520278 0
+97C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\style.css133825825966479756 0
 131C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\escape-string-regexp\readme.md133824081371458049 0
 120C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\word-wrap\README.md133824157954451404 0
 139C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\@parcel\transformer-image\package.json133824081373765770 0
@@ -2207,6 +2207,7 @@
 136C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\crypto-browserify\.github\workflows133824157958600881 1
 158C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\firebase\storage\dist\esm\compat\remote-config\index.d.ts133824081460857456 0
 111C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\node-fetch133824085400594929 1
+114C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\index.4270eac7.js.map133825826262873906 0
 138C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\jose\dist\node\esm\util\decode_jwt.js133824085404670601 0
 135C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\undici-types\mock-interceptor.d.ts133824081380578709 0
 125C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\node_modules\hash.js\lib\hash\hmac.js133824157956394835 0
@@ -24360,12 +24361,15 @@
 111C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\index.0f19419a.css133824821893593596 0
 115C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\index.0f19419a.css.map133824821894115877 0
 114C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\index.0f4d2954.js.map133824504978836330 0
+111C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\index.396a7e1f.css133825826262603101 0
+115C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\index.396a7e1f.css.map133825826262852808 0
+110C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\index.4270eac7.js133825826262623115 0
 115C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\index.65dce202.css.map133824085061943272 0
 114C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\index.87fe931e.js.map133825816570758036 0
 111C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\index.8e35e7c5.css133824504978349034 0
 110C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\index.c836a6b5.js133824821893599852 0
 114C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\index.c836a6b5.js.map133824821894138510 0
-103C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\index.html133825820392026642 0
+103C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\index.html133825826262603101 0
 113C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\manifest.webmanifest133824504978343709 0
 123C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\docs\service-worker.833c79d9.js.map133825816570733297 0
 116C:\Users\robde\Documents\Fanshawe\Winter_2025\INFO-5146 Web Development Trends\todo-app\.github\workflows\deploy.yml133824150252077200 0
