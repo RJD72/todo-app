@@ -28,46 +28,10 @@
     </header>
     <main>
       <div class="container">
-        <!-- Modal Trigger -->
-        <button id="openModalBtn">Add Task</button>
-
-        <!-- Modal -->
-        <div
-          id="modal"
-          role="dialog"
-          aria-labelledby="modalTitle"
-          aria-modal="true"
-          hidden
-        >
-          <h2 id="modalTitle">Add a New Task</h2>
-          <input type="text" placeholder="Task Name" />
-          <button id="closeModalBtn">Close</button>
-        </div>
-
-        <!-- Notification Area -->
-        <div aria-live="polite" id="notification"></div>
-
-        <!-- Dropdown Trigger -->
-        <button aria-haspopup="listbox" aria-expanded="false" id="dropdownBtn">
-          Choose a Priority
-        </button>
-
-        <!-- Dropdown List -->
-        <ul id="dropdown" role="listbox" style="display: none">
-          <li id="priority-high" role="option" tabindex="0">High</li>
-          <li id="priority-medium" role="option" tabindex="0">Medium</li>
-          <li id="priority-low" role="option" tabindex="0">Low</li>
-        </ul>
-
-        <!-- <form action="">
-          <label for="taskInput">Enter a task</label>
-
-          <input name="taskInput" type="text" id="taskInput" tabindex="1" />
-          <button id="addTaskBtn" tabindex="2" aria-label="Add Task">
-            Add Task
-          </button>
-        </form> -->
-        <ul id="taskList"></ul>
+        <label for="taskInput"><h2>Enter a task</h2></label>
+        <input name="taskInput" type="text" id="taskInput" />
+        <button id="addTaskBtn">Add Task</button>
+        <ul aria-live="polite" id="taskList"></ul>
       </div>
     </main>
     <script type="module" src="app.js"></script>
