@@ -57,16 +57,36 @@ li {
   border-radius: 4px;
 }
 
-#dropdown {
-  display: none;
+#chatbot-container {
+  width: 300px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: white;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
-#dropdown.dropdown-open {
-  display: block;
+
+#chat-history {
+  height: 200px;
+  overflow-y: auto;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px;
+  padding: 5px;
 }
-li:focus {
-  outline: 2px solid blue;
+
+#chat-input {
+  width: calc(100% - 60px);
+  padding: 5px;
+  margin-right: 5px;
 }
-li.completed {
-  text-decoration: line-through;
-  opacity: 0.6;
+
+#send-btn {
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.history {
+  padding-bottom: 15px;
 }
