@@ -8,6 +8,19 @@ import {
   getFirestore,
   collection,
 } from "firebase/firestore";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+
+// Call in the event listener for page load
+async function getApiKey() {
+  let snapshot = await getDoc(doc(db, "apikey", "googlegenai"));
+  apiKey = snapshot.data().key;
+  genAI = new GoogleGenerativeAI(apiKey);
+  model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+}
+
+async function askChatBot(request) {
+  return await model.generateContent(request);
+}
 
 // Service Worker Registration
 if ("serviceWorker" in navigator) {
@@ -31,6 +44,16 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+
+const taskInput = document.getElementById("taskInput");
+const addTaskBtn = document.getElementById("addTaskBtn");
+const taskList = document.getElementById("taskList");
+const aiButton = document.getElementById("send-btn");
+const aiInput = document.getElementById("chat-input");
+
+window.addEventListener("load", () => {
+  renderTasks();
+});
 
 // Add Task
 addTaskBtn.addEventListener("click", async () => {
@@ -116,6 +139,64 @@ taskList.addEventListener("keypress", async function (e) {
   }
   renderTasks();
 });
+
+// Chatbot logic
+function ruleChatBot(request) {
+  if (request.startsWith("add task")) {
+    let task = request.replace("add task", "").trim();
+    if (task) {
+      addTask(task);
+      appendMessage("Task " + task + " added!");
+    } else {
+      appendMessage("Please enter a task");
+    }
+    return true;
+  } else if (request.startsWith("complete")) {
+    let taskName = request.replace("complete", "").trim();
+    if (taskName) {
+      if (removeFromTaskName(taskName)) {
+        appendMessage("Task " + taskName + " marked as completed!");
+      } else {
+        appendMessage("Task not found");
+      }
+    } else {
+      appendMessage("Please enter a task name");
+    }
+    return true;
+  }
+  return false;
+}
+
+aiButton.addEventListener("click", async () => {
+  let prompt = aiInput.value.trim().toLowerCase();
+  if (prompt) {
+    if (!ruleChatBot(prompt)) {
+      askChatBot(prompt);
+    }
+  } else {
+    appendMessage("Please enter a prompt");
+  }
+});
+
+function appendMessage(message) {
+  let history = document.createElement("div");
+  history.textContent = message;
+  history.className = "history";
+  chatHistory.appendChild(history);
+  aiInput.value;
+}
+
+function removeFromTaskName(task) {
+  let ele = document.getElementsByName(task);
+  if (ele.length === 0) {
+    return false;
+  }
+  ele.forEach((e) => {
+    removeTask(e.id);
+    removeVisualTask(e.id);
+  });
+  return true;
+}
 
 window.addEventListener("error", function (event) {
   console.error("Error occurred: ", event.message);
