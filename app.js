@@ -145,7 +145,7 @@ function ruleChatBot(request) {
   if (request.startsWith("add task")) {
     let task = request.replace("add task", "").trim();
     if (task) {
-      addTask(task);
+      addTaskToFirestore(task);
       appendMessage("Task " + task + " added!");
     } else {
       appendMessage("Please enter a task");
