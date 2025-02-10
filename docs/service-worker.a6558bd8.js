@@ -1,0 +1,2 @@
+const s=["","/assets/html/index.html","/assets/html/tasks.html","/assets/css/style.css","assets/js/firebase.js","assets/js/signIn.js","assets/js/tasks.js","/manifest.json","/assets/icons/icon-128.png","/assets/icons/icon-512.png"];self.addEventListener("install",e=>{e.waitUntil(caches.open("to-do-pwa-cache-v1").then(e=>e.addAll(s)))}),self.addEventListener("fetch",s=>{s.respondWith(caches.match(s.request).then(e=>e||fetch(s.request)))});
+//# sourceMappingURL=service-worker.a6558bd8.js.map
