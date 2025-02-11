@@ -14,7 +14,7 @@ if ("serviceWorker" in navigator) {
     .catch((err) => console.error("Service Worker Error:", err)); // Log errors
 }
 
-function signIn(auth, provider) {
+signInBtn.addEventListener("click", (e) => {
   signInWithPopup(auth, provider)
     .then((result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);
@@ -24,13 +24,6 @@ function signIn(auth, provider) {
       window.location = "tasks.html";
     })
     .catch((error) => {
-      const errorCode = error.code;
-      const errorMessage = error.message;
-      const email = error.customData.email;
-      const credential = GoogleAuthProvider.credentialFromError(error);
+      console.error("Sign-in error:", error);
     });
-}
-
-signInBtn.addEventListener("click", (e) => {
-  signIn(auth, provider);
 });
