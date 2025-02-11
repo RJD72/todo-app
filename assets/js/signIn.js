@@ -14,7 +14,7 @@ if ("serviceWorker" in navigator) {
     .catch((err) => console.error("Service Worker Error:", err)); // Log errors
 }
 
-function signIn() {
+function signIn(auth, provider) {
   signInWithPopup(auth, provider)
     .then((result) => {
       const credential = GoogleAuthProvider.credentialFromResult(result);

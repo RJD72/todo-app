@@ -2,6 +2,7 @@ const email = JSON.parse(localStorage.getItem("email"));
 
 if (!email) window.location.href = "index.html";
 
+import { db } from "./firebase.js";
 import {
   doc,
   getDoc,
@@ -100,7 +101,12 @@ async function addTaskToFirestore(taskText) {
 async function getTasksFromFirestore() {
   // Fetch all tasks from the "todos" collection in Firestore
   let q = query(collection(db, "todos"), where("email", "==", email));
-  return await getDocs(q);
+  let querySnapshot = await getDocs(q);
+  return querySnapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
+
   // let querySnapshot = await getDocs(collection(db, "todos"));
   // return querySnapshot.docs.map((doc) => ({
   //   id: doc.id,
